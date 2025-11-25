@@ -1,0 +1,40 @@
+package com.example.Back.Entity;
+
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.util.List; // Importa a classe List
+
+@Entity
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Table(name = "componentes")
+public class Componente {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(nullable = false)
+    private String nome;
+
+    @Column(nullable = false, unique = true)
+    private String codigoPatrimonio;
+
+    private int quantidade;
+    private String localizacao;
+    private String categoria;
+
+    @Column(nullable = false) // Garante que nunca é nulo
+    private int nivelMinimoEstoque = 1; // Valor padrão 1 (pode ser ajustado)
+
+    @OneToMany(mappedBy = "componente", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Historico> historicos;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "empresa_id", nullable = false)
+    private Empresa empresa;
+}

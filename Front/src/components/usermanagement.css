@@ -1,0 +1,34 @@
+.user-management-container {
+  margin-top: 1rem;
+  overflow-x: auto;
+}
+
+.user-management-container table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.user-management-container th,
+.user-management-container td {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  border-bottom: 1px solid var(--cor-borda, var(--cinzaMedio));
+
+  /* 1. AQUI: Forçamos a cor para PRETO PURO no modo claro */
+  color: #000000;
+  font-size: 0.95rem; /* Um ajuste fino no tamanho também ajuda a leitura */
+}
+
+/* Opcional: Se quiser que o cabeçalho (th) seja um pouco mais destacado ou diferente */
+.user-management-container th {
+  font-weight: bold;
+  /* Pode manter preto ou usar a cor secundária (azul escuro) se preferir */
+  color: var(--azulEscuroOriginal, #1a2e44);
+}
+
+/* 2. IMPORTANTE: Correção para o Modo Escuro */
+/* Se não fizermos isso, o texto ficará preto no fundo preto */
+body.dark .user-management-container th,
+body.dark .user-management-container td {
+  color: var(--branco-puro, #ffffff);
+}
